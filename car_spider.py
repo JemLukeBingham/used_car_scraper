@@ -1,7 +1,7 @@
 import scrapy
 
-class QuotesSpider(scrapy.Spider):
-    name = 'quotes'
+class CarSpider(scrapy.Spider):
+    name = 'cars'
     start_urls = [
         'https://www.automart.co.za/used-cars/',
     ]
