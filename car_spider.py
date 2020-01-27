@@ -19,5 +19,5 @@ class CarSpider(scrapy.Spider):
             car['dealer_phone'] = result.css("a#phnum::text").get()
             yield car
         next_page = response.xpath("//nav/ul/li/a[@aria-label='Next']/@href").get() 
-        #if next_page is not None:
-        #    yield response.follow(next_page, self.parse)
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
