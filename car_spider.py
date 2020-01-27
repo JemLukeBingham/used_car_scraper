@@ -1,28 +1,32 @@
 import scrapy
 import logging
 
-def format_mileage(text):
+def format_mileage(mileage):
     """
     Formats mileage text data from automart. Returns int in kilometres.
     """
     try:
-        return int(text.replace(" ", "").replace("km",""))
-    except ValueError:
-        logging.warning("Could not convert data to int: %s" % text)
-        return None
+        return int(mileage.replace(" ", "").replace("km",""))
+    except:
+        logging.warning("Could not convert mileage data to int: %s" % mileage)
+        return mileage
 
-def format_year(text):
+def format_year(year):
     """
     Formats year text data from automart. Returns int.
     """
-    return int(text)
-
-def format_price(text):
     try:
-        return float(text.replace(" ", "").replace(",","").replace("R",""))
-    except ValueError:
-        logging.warning("Could not convert price data to float: %s" % text)
-        return None
+        return int(year)
+    except:
+        logging.warning("Could not convert year data to int: %r" % year)
+        return year
+
+def format_price(price):
+    try:
+        return float(price.replace(" ", "").replace(",","").replace("R",""))
+    except:
+        logging.warning("Could not convert price data to float: %s" % price)
+        return price
 
 class CarSpider(scrapy.Spider):
     name = 'cars'
@@ -43,6 +47,7 @@ class CarSpider(scrapy.Spider):
             car['mileage'] = format_mileage(result.xpath("div/div/div/i[@class='mi']/em/text()").get())
             car['year'] = format_year(result.xpath("div/div/div/i[@class='ye']/em/em/text()").get())
             car['price'] = format_price(result.xpath("div/div/span/em/text()").get())
+            car['link'] = response.url + result.xpath("div/div/a/@href").get()
             yield car
         next_page = response.xpath("//nav/ul/li/a[@aria-label='Next']/@href").get() 
         if next_page is not None:
