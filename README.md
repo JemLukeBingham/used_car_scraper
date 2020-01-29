@@ -3,7 +3,6 @@
 Tools for scraping used car data from the web in South Africa.
 
 Usage 
-
 	scrapy runspider cars_spider.py -o output.json
 
 (Optional)
