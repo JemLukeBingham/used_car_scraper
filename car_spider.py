@@ -48,6 +48,9 @@ class CarSpider(scrapy.Spider):
             car['year'] = format_year(result.xpath("div/div/div/i[@class='ye']/em/em/text()").get())
             car['price'] = format_price(result.xpath("div/div/span/em/text()").get())
             car['link'] = response.url + result.xpath("div/div/a/@href").get()
+            car['province'] = result.xpath("div/div/div/i[@class='re']/em/em/text()").get()
+            car['description'] = result.xpath("div/div/h3/a/em/text()").get()
+            car['long_description'] = result.xpath("div/div/span/text()").get()
             yield car
         next_page = response.xpath("//nav/ul/li/a[@aria-label='Next']/@href").get() 
         if next_page is not None:
