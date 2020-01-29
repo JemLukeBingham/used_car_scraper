@@ -6,5 +6,4 @@ Usage
 
 	scrapy runspider cars_spider.py -o output.json
 
-(Optional)
-"-s LOG_FILE=logfile.log" logs output to logfile, suppresses output to console
+Optionally add `-s LOG_FILE=logfile.log` to log output to file and suppress output to console
