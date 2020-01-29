@@ -7,7 +7,7 @@ def format_mileage(mileage):
     """
     try:
         return int(mileage.replace(" ", "").replace("km",""))
-    except ValueError, TypeError:
+    except (ValueError, TypeError):
         logging.warning("Could not convert mileage data to int: %s" % mileage)
         return mileage
 
@@ -17,14 +17,14 @@ def format_year(year):
     """
     try:
         return int(year)
-    except ValueError, TypeError:
+    except (ValueError, TypeError):
         logging.warning("Could not convert year data to int: %r" % year)
         return year
 
 def format_price(price):
     try:
         return float(price.replace(" ", "").replace(",","").replace("R",""))
-    except ValueError, TypeError:
+    except (ValueError, TypeError):
         logging.warning("Could not convert price data to float: %s" % price)
         return price
 
