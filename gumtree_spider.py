@@ -1,10 +1,12 @@
 import scrapy
+from urllib.parse import urljoin
 from text_formatting import format_mileage, format_year, format_price
 
 class GumtreeSpider(scrapy.Spider):
     name = 'gumtree'
+    base_url = 'https://www.gumtree.co.za/'
     start_urls = [
-        'https://www.gumtree.co.za/s-cars-bakkies/v1c9077p1',
+        urljoin(base_url, 's-cars-bakkies/v1c9077p1'),
     ]
     def parse(self, response):
         for result in response.xpath("//div[@class='view']/\
@@ -19,6 +21,6 @@ class GumtreeSpider(scrapy.Spider):
                                                span[@class='related-ad-description']/\
                                                span[@class='description-text']/text()").get()
             yield car
-        #next_page = response.xpath("//nav/ul/li/a[@aria-label='Next']/@href").get() 
-        #if next_page is not None:
-        #    yield response.follow(next_page, self.parse)
+        next_page = response.xpath("//div[@class='pagination-content']/span/a[@class=' icon-pagination-right']/@href").get() 
+        if next_page is not None:
+            yield response.follow(urljoin(self.base_url, next_page), self.parse)
