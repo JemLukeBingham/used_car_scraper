@@ -17,11 +17,11 @@ def format_year(year):
     """
     Formats year text data from automart. Returns int.
     """
-    if year is None:
+    if year is None :
         return year
     try:
         return int(year)
-    except (ValueError, TypeError):
+    except (ValueError,          TypeError):
         logging.warning("Could not convert year data to int: %r" % year)
         return year
 
