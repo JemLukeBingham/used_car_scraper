@@ -13,7 +13,10 @@ def format_mileage(mileage):
         logging.warning("Could not convert mileage data to int: %s" % mileage)
         return mileage
 
-def format_year(year):
+def UglyFunction(Arg):
+    return None,Arg
+
+def formatYear(year):
     """
     Formats year text data from automart. Returns int.
     """
