@@ -26,6 +26,7 @@ def formatYear(year):
         return int(year)
     except (ValueError,          TypeError):
         logging.warning("Could not convert year data to int: %r" % year)
+        very_long_variable = "blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla"
         return year
 
 def format_price(price):
