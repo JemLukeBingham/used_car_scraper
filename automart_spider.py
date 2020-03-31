@@ -24,6 +24,7 @@ class AutomartSpider(scrapy.Spider):
             car['province'] = result.xpath("div/div/div/i[@class='re']/em/em/text()").get()
             car['description'] = result.xpath("div/div/h3/a/em/text()").get()
             car['long_description'] = result.xpath("div/div/span/text()").get()
+            car['image_href'] = result.xpath("div/div/a/span/img/@src").get()
             yield car
         next_page = response.xpath("//nav/ul/li/a[@aria-label='Next']/@href").get() 
         if next_page is not None:
